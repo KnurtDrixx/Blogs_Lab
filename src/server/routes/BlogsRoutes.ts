@@ -39,7 +39,8 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const title: string = req.body.title;
   const content: string = req.body.content;
-  const newBlogInfo = { title, content, authorid: 1 };
+  const tag: string = req.body.tag;
+  const newBlogInfo = { title, content, authorid: 1, tag };
 
   try {
     const DBres = await BlogsDB.createOneBlog(newBlogInfo);
@@ -52,9 +53,10 @@ router.post("/", async (req, res) => {
 
 //update a blog
 router.put("/:id", async (req, res) => {
-  let { title, content } = req.body;
+  let { title, content, tag } = req.body;
   const id = Number(req.params.id);
-  const updateBlogInfo = { title, content, authorid: 1 };
+
+  const updateBlogInfo = { title, content, authorid: 1, tag };
 
   try {
     const update = await BlogsDB.updateOneBlog(updateBlogInfo, id);
