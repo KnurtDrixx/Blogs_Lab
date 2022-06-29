@@ -3,9 +3,11 @@ import { sqlConfig } from "../config";
 
 const pool = mysql.createPool(sqlConfig);
 
-export function query<T = mysql.OkPacket>(sql: string, vals?: unknown[]) {
+export function query<T = mysql.OkPacket>(sql: string, vals: unknown[] = []) {
   return new Promise<T>((resolve, reject) => {
-    pool.query(sql, vals, (err, result) => {
+    const formatted = mysql.format(sql, vals);
+
+    pool.query(formatted, (err, result) => {
       if (err) {
         reject(err);
       } else {

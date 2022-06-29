@@ -4,25 +4,24 @@ import { query } from "../index";
 const getAllBlogs = () =>
   query<IBlog[]>(
     `
-SELECT * from Blogs
+    SELECT Blogs.*, Tags.name AS Tag_Name, Authors.name AS Author_Name From Blogs
+Join Authors on Authors.id = Blogs.authorid
+Left Join BlogTags on BlogTags.blogid = Blogs.id
+Left Join Tags on BlogTags.tagid = Tags.id
+Order By Blogs.id desc
 `,
     []
   );
 
 //! need to fix junk data without tags in database, all blogs need a tag to be displayed
 
-//   //SELECT Blogs.*, Tags.name, Authors.name From Blogs
-// Join Authors on Authors.id = Blogs.authorid
-// Join BlogTags on BlogTags.blogid = Blogs.id
-// Join Tags on BlogTags.tagid = Tags.id
-
 const getOneBlog = (id: number) =>
   query<IBlog[]>(
     `
-SELECT Blogs.*, Tags.name, Authors.name From Blogs
+SELECT Blogs.*, Tags.name AS Tag_Name, Authors.name AS Author_Name, Tags.id as tagid From Blogs
 Join Authors on Authors.id = Blogs.authorid
-Join BlogTags on BlogTags.blogid = Blogs.id
-Join Tags on BlogTags.tagid = Tags.id
+Left Join BlogTags on BlogTags.blogid = Blogs.id
+Left Join Tags on BlogTags.tagid = Tags.id
 Where Blogs.id = ?;
 `,
     [id]

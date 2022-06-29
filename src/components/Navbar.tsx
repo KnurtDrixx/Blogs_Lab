@@ -7,8 +7,8 @@ const Navbar = () => {
       <NavLink to="/Blogs" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
         Home
       </NavLink>
-      <NavLink to="/Chirps/New" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
-        New Chirp Perhaps??
+      <NavLink to="/Blogs/New" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
+        New Blog Mayhaps??
       </NavLink>
     </nav>
   );

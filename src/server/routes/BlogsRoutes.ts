@@ -1,5 +1,6 @@
 import * as express from "express";
 import BlogsDB from "../database/queries/Blogs";
+import BlogTagsDB from "../database/queries/BlogTags";
 
 const router = express.Router();
 
@@ -39,8 +40,9 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const title: string = req.body.title;
   const content: string = req.body.content;
-  const tag: string = req.body.tag;
-  const newBlogInfo = { title, content, authorid: 1, tag };
+  const authorid: number = req.body.authorid;
+
+  const newBlogInfo = { title, content, authorid };
 
   try {
     const DBres = await BlogsDB.createOneBlog(newBlogInfo);
@@ -53,13 +55,16 @@ router.post("/", async (req, res) => {
 
 //update a blog
 router.put("/:id", async (req, res) => {
-  let { title, content, tag } = req.body;
+  let { title, content, tagid } = req.body;
   const id = Number(req.params.id);
+  const authorid: number = req.body.authorid;
 
-  const updateBlogInfo = { title, content, authorid: 1, tag };
+  const updateBlogInfo = { title, content, authorid };
 
   try {
     const update = await BlogsDB.updateOneBlog(updateBlogInfo, id);
+    await BlogTagsDB.updateBlogTag(id, tagid);
+    console.log(updateBlogInfo, tagid);
     if (update.affectedRows) {
       res.status(200).json({ message: "blog updated successfully" });
     } else {

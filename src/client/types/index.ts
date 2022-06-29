@@ -4,13 +4,15 @@ export interface IBlog {
   content: string;
   authorid: number;
   _created: Date | string;
-  tag: string;
+  Tag_Name: string;
+  Author_Name: string;
 }
 
 export interface NewBlog {
   title: string;
   content: string;
   authorid: number;
+  tag: string;
 }
 
 export interface IAuthors {
