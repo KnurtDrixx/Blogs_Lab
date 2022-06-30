@@ -83,6 +83,9 @@ const UpdateBlog = () => {
   return (
     <>
       <div>
+        <h1 className="text-center p-2" style={{ background: "#CBC3E3", color: "#32CD32" }}>
+          Edit the Blog
+        </h1>
         <form>
           <label>Blog Title:</label>
           <input placeholder="blogTitle" type="text" value={title} onChange={(e) => setBlogTitle(e.target.value)} />
@@ -107,7 +110,11 @@ const UpdateBlog = () => {
             ))}
           </select>
         </form>
-        <button onClick={() => handleUpdateBlog()}>Submit New Blog</button>
+        <div className="d-flex justify-content-center">
+          <button className="btn btn-success btn-lg" onClick={() => handleUpdateBlog()}>
+            Submit New Blog
+          </button>
+        </div>
       </div>
     </>
   );
