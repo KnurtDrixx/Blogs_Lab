@@ -7,3 +7,7 @@ export const sqlConfig = {
   host: process.env.DB_HOST,
   database: process.env.DB_DATABASE,
 };
+
+export const stripeKey = {
+  key: process.env.S_KEY!,
+};

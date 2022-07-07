@@ -7,6 +7,11 @@ import AllBlogs from "./views/AllBlogs";
 import NewBlog from "./views/NewBlog";
 import SingleBlog from "./views/SingleBlog";
 import UpdateBlog from "./views/UpdateBlog";
+import DonateView from "./views/DonateView";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripe = loadStripe("pk_test_51LIYcPBaXgaKkpHWPTHMSHwqKsQ9muNSn3GAlR3puEwR4YYPTU4h3D9GDpk0wffLIRyV0lb16WA60QQ1Q14deVWx00ksb1zC69");
 
 const App = (props: AppProps) => {
   const [Blog, setBlog] = useState<IBlog[]>([]);
@@ -41,6 +46,14 @@ const App = (props: AppProps) => {
         <Route path="/Blogs" element={<AllBlogs />} />
         <Route path="/Blogs/:id" element={<SingleBlog />} />
         <Route path="/Blogs/New" element={<NewBlog />} />
+        <Route
+          path="/Blogs/Donate"
+          element={
+            <Elements stripe={stripe}>
+              <DonateView />
+            </Elements>
+          }
+        />
         <Route path="/Blogs/Edit/:id" element={<UpdateBlog />} />
       </Routes>
     </main>

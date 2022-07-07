@@ -34,6 +34,18 @@ const AllBlogs = () => {
       <h1 className="text-center p-2 m-2" style={{ color: "#CC8899" }}>
         All the Blogs
       </h1>
+      <h2>
+        <div className="d-flex justify-content-center">
+          <button
+            className="btn btn-info btn-lg"
+            onClick={() => {
+              nav(`/Blogs/Donate`);
+            }}
+          >
+            Donate
+          </button>
+        </div>
+      </h2>
       <div style={{ backgroundColor: randomColor() }}>
         {Blog.map((blog) => (
           <div key={blog.id} className="border border-primary border-2 p-2 m-2" style={{ backgroundColor: `${color}` }}>
