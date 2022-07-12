@@ -7,3 +7,9 @@ export const sqlConfig = {
   host: process.env.DB_HOST,
   database: process.env.DB_DATABASE,
 };
+
+export const contactConfig = {
+  domain: process.env.MAILGUN_DOMAIN!,
+  key: process.env.MAILGUN_KEY!,
+  email: process.env.MAILGUN_EMAIL!,
+};

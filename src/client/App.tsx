@@ -7,6 +7,7 @@ import AllBlogs from "./views/AllBlogs";
 import NewBlog from "./views/NewBlog";
 import SingleBlog from "./views/SingleBlog";
 import UpdateBlog from "./views/UpdateBlog";
+import ContactPage from "./views/ContactView";
 
 const App = (props: AppProps) => {
   const [Blog, setBlog] = useState<IBlog[]>([]);
@@ -42,6 +43,7 @@ const App = (props: AppProps) => {
         <Route path="/Blogs/:id" element={<SingleBlog />} />
         <Route path="/Blogs/New" element={<NewBlog />} />
         <Route path="/Blogs/Edit/:id" element={<UpdateBlog />} />
+        <Route path="/Blogs/Contact" element={<ContactPage />} />
       </Routes>
     </main>
   );
