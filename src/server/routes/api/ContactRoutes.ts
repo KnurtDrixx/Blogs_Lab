@@ -3,7 +3,8 @@ import * as express from "express";
 import MailGun from "mailgun.js";
 import * as FormData from "form-data";
 import * as Mailgun from "mailgun.js";
-import { contactConfig } from "../config";
+import { contactConfig } from "../../config";
+import { isValidToken } from "../../utilities/tokenCheck";
 
 const router = express.Router();
 //current path is /api/Contact

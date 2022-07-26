@@ -13,3 +13,7 @@ export const contactConfig = {
   key: process.env.MAILGUN_KEY!,
   email: process.env.MAILGUN_EMAIL!,
 };
+
+export const JWTConfig = {
+  secret: process.env.JWT_SECRET!,
+};

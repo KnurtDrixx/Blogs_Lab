@@ -1,5 +1,5 @@
 import * as express from "express";
-import BlogTagsDB from "../database/queries/BlogTags";
+import BlogTagsDB from "../../database/queries/BlogTags";
 
 const router = express.Router();
 

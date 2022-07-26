@@ -10,6 +10,9 @@ const Navbar = () => {
       <NavLink to="/Blogs/New" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
         New Blog Mayhaps??
       </NavLink>
+      <NavLink to="/Login" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
+        Login/Register
+      </NavLink>
     </nav>
   );
 };

@@ -1,6 +1,7 @@
 import * as express from "express";
-import BlogsDB from "../database/queries/Blogs";
-import BlogTagsDB from "../database/queries/BlogTags";
+import BlogsDB from "../../database/queries/Blogs";
+import BlogTagsDB from "../../database/queries/BlogTags";
+import { isValidToken } from "../../utilities/tokenCheck";
 
 const router = express.Router();
 
@@ -37,10 +38,10 @@ router.get("/:id", async (req, res) => {
 });
 
 //create a blog
-router.post("/", async (req, res) => {
+router.post("/", isValidToken, async (req, res) => {
   const title: string = req.body.title;
   const content: string = req.body.content;
-  const authorid: number = req.body.authorid;
+  const authorid: number = req.payload.id;
 
   const newBlogInfo = { title, content, authorid };
 
@@ -54,10 +55,10 @@ router.post("/", async (req, res) => {
 });
 
 //update a blog
-router.put("/:id", async (req, res) => {
+router.put("/:id", isValidToken, async (req, res) => {
   let { title, content, tagid } = req.body;
   const id = Number(req.params.id);
-  const authorid: number = req.body.authorid;
+  const authorid: number = req.payload.id;
 
   const updateBlogInfo = { title, content, authorid };
 
@@ -77,7 +78,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //delete a blog
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isValidToken, async (req, res) => {
   const id = Number(req.params.id);
   try {
     const destroy = await BlogsDB.destroyOneBlog(id);
