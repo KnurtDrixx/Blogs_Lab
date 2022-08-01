@@ -10,6 +10,8 @@ const router = express.Router();
 
 //current path is /api
 // router.use("/Authors", Authors);
+// author route is commented out because it returns email and password
+
 router.use("/Contact", Contact);
 router.use("/Tags", Tags);
 router.use("/Blogs", Blogs);

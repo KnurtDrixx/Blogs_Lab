@@ -80,8 +80,9 @@ router.put("/:id", isValidToken, async (req, res) => {
 //delete a blog
 router.delete("/:id", isValidToken, async (req, res) => {
   const id = Number(req.params.id);
+  const authorid = req.payload.id;
   try {
-    const destroy = await BlogsDB.destroyOneBlog(id);
+    const destroy = await BlogsDB.destroyOneBlog(id, authorid);
 
     if (destroy.affectedRows) {
       res.status(200).json({ message: "target blog destroyed" });
