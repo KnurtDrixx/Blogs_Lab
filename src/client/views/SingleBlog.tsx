@@ -2,6 +2,7 @@ import * as React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IBlog } from "../types";
+import { apiService } from "../utilities/apiService";
 
 const SingleBlog = () => {
   const nav = useNavigate();
@@ -15,12 +16,7 @@ const SingleBlog = () => {
   const [color, setColor] = useState<String>("");
 
   const deleteBlog = () => {
-    fetch(`/api/Blogs/${id}`, {
-      method: "DELETE",
-      // headers: { "content-type": "application/json" },
-      // body: JSON.stringify({ content: chirpContent, location: chirpLocation }),
-    })
-      .then((res) => res.json())
+    apiService(`/api/Blogs/${id}`, "DELETE")
       .then((message) => {
         console.log(message);
         alert(`Blog ${id} has been found and KILLED successfully`);
@@ -44,8 +40,7 @@ const SingleBlog = () => {
   }, [color]);
 
   useEffect(() => {
-    fetch(`/api/Blogs/${id}`)
-      .then((res) => res.json())
+    apiService(`/api/Blogs/${id}`)
       .then((data) => setBlog(data))
       .catch((err) => console.log(err));
   }, []);

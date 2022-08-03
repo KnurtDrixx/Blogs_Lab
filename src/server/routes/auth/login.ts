@@ -32,7 +32,7 @@ const checkCredentials = async (req: express.Request, res: express.Response, nex
     //at this point the user has the correct email and password and is who they say they are.
 
     delete user.password;
-    //security to keep password hidden
+    //security to keep password hidden, not 100% necessary becasue making req.payload object be email and id. but is good practice.
 
     req.payload = { email: user.email, id: user.id };
 
@@ -46,7 +46,7 @@ const checkCredentials = async (req: express.Request, res: express.Response, nex
 //current path is /auth/login
 router.post("/", checkCredentials, (req, res) => {
   const token = tokenMaker.signToken(req.payload);
-  res.json(token);
+  res.json({ token });
 });
 
 export default router;

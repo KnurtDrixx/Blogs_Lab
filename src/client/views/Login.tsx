@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiService } from "../utilities/apiService";
 
 const Login = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
@@ -25,21 +26,14 @@ const Login = () => {
       return;
     }
 
-    if (isLoggingIn) {
-      fetch("/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) })
-        .then((res) => res.json())
-        .then((data) => {
-          localStorage.setItem("token", data);
-        })
-        .catch((err) => console.log(err));
-    } else {
-      fetch("/auth/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, password }) })
-        .then((res) => res.json())
-        .then((data) => {
-          localStorage.setItem("token", data.token);
-        })
-        .catch((err) => console.log(err));
-    }
+    let url = isLoggingIn ? "/auth/login" : "/auth/register";
+
+    apiService(url, "POST", { name, email, password })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+      })
+      .catch((err) => console.log(err));
+
     nav(`/Blogs`);
   };
   //at this point email, password and name(if user is registering) are inputted

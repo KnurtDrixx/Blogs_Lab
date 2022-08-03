@@ -10,7 +10,7 @@ export interface IBlog {
 export interface NewBlog {
   title: string;
   content: string;
-  authorid: number;
+  authorid?: number;
 }
 
 export interface IAuthors {

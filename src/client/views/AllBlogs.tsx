@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { IBlog } from "../types";
 import { useNavigate } from "react-router-dom";
+import { apiService } from "../utilities/apiService";
 
 const AllBlogs = () => {
   const nav = useNavigate();
@@ -9,8 +10,7 @@ const AllBlogs = () => {
   const [color, setColor] = useState<String>("");
 
   useEffect(() => {
-    fetch("/api/Blogs")
-      .then((res) => res.json())
+    apiService("/api/Blogs")
       .then((data) => setBlog(data))
       .catch((err) => console.log(err));
   }, []);

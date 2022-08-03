@@ -2,6 +2,7 @@ import * as React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IBlog, ITags, IAuthors } from "../types";
+import { apiService } from "../utilities/apiService";
 
 const UpdateBlog = () => {
   const [title, setBlogTitle] = useState<string>("");
@@ -24,12 +25,7 @@ const UpdateBlog = () => {
       return;
     }
 
-    fetch(`/api/Blogs/${id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ title, content, authorid: selectedAuthorId, tagid: selectedTagId }),
-    })
-      .then((res) => res.json())
+    apiService(`/api/Blogs/${id}`, "PUT", { title, content, authorid: selectedAuthorId, tagid: selectedTagId })
       .then((data) => {
         console.log(data);
         nav(`/Blogs/${id}`);
@@ -38,8 +34,7 @@ const UpdateBlog = () => {
   };
 
   useEffect(() => {
-    fetch(`/api/Blogs/${id}`)
-      .then((res) => res.json())
+    apiService(`/api/Blogs/${id}`)
       .then((data) => {
         setBlogTitle(data.title);
         setBlogContent(data.content);
@@ -50,8 +45,7 @@ const UpdateBlog = () => {
   }, []);
 
   const getAllTags = () => {
-    fetch(`/api/Tags`)
-      .then((res) => res.json())
+    apiService(`/api/Tags`)
       .then((data) => {
         setTagsArray(data); // set the data to state if no error
       })
@@ -62,8 +56,7 @@ const UpdateBlog = () => {
   };
 
   const getAllAuthors = () => {
-    fetch(`/api/Authors`)
-      .then((res) => res.json())
+    apiService(`/api/Authors`)
       .then((data) => {
         setAuthorsArray(data); // set the data to state if no error
       })

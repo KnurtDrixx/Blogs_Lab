@@ -1,30 +1,41 @@
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiService } from "../utilities/apiService";
 
 const ContactPage = () => {
   const [contact, setContact] = useState("");
   const nav = useNavigate();
 
   const subscribeToBlogLife = () => {
-    fetch("/api/Contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: contact }),
-    })
-      .then((res) => res.json())
+    apiService("/api/Contact", "POST", { email: contact })
       .then((data) => {
-        alert("Thank you for subscribing to Blogs forver, dont forget to Donate //Merge donate branch");
+        alert("Thank you for subscribing to Blogs forEver, dont forget to Donate //Merge donate branch");
         nav("/Blogs");
         console.log(data);
       })
       .catch((err) => console.error(err));
+
+    // old stuff
+
+    // fetch("/api/Contact", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ email: contact }),
+    // })
+    // .then((res) => res.json())
+    // .then((data) => {
+    //   alert("Thank you for subscribing to Blogs forver, dont forget to Donate //Merge donate branch");
+    //   nav("/Blogs");
+    //   console.log(data);
+    // })
+    // .catch((err) => console.error(err));
   };
 
   return (
     <>
       <marquee scrollamount="20" behavior="alternate">
-        <input value={contact} onChange={(e) => setContact(e.target.value)} />
+        <input placeholder="Put Email Here" value={contact} onChange={(e) => setContact(e.target.value)} />
       </marquee>
 
       <button className="btn btn-warning" onClick={subscribeToBlogLife}>

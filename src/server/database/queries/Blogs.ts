@@ -30,7 +30,7 @@ Where Blogs.id = ?;
 const destroyOneBlog = (id: number, authorid: number) => query("DELETE FROM Blogs WHERE id = ? AND authorid = ?", [id, authorid]);
 const destroyOneBlogTag = (id: number) => query("DELETE FROM BlogTags WHERE blogid = ?", [id]);
 const createOneBlog = (newBlog: NewBlog) => query("INSERT INTO Blogs SET ?", [newBlog]);
-const updateOneBlog = (updatedBlog: NewBlog, id: number) => query("UPDATE Blogs SET ? WHERE id=?", [updatedBlog, id]);
+const updateOneBlog = (updatedBlog: NewBlog, id: number, authorid: number) => query("UPDATE Blogs SET ? WHERE id=? AND authorid = ?", [updatedBlog, id, authorid]);
 
 export default {
   getAllBlogs,

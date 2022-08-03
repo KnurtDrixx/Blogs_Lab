@@ -31,3 +31,9 @@ export interface IBlogTags {
   tagid: number;
 }
 //create types for the rest of the queries
+
+interface IFetchOptions {
+  method: string;
+  headers?: HeadersInit;
+  body?: string;
+}
