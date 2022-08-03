@@ -22,7 +22,10 @@ const SingleBlog = () => {
         alert(`Blog ${id} has been found and KILLED successfully`);
         nav(`/Blogs`);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(`Don't touch that it isn't yours`);
+      });
   };
 
   const randomColor = () => {
