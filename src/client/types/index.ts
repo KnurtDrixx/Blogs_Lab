@@ -32,7 +32,7 @@ export interface IBlogTags {
 }
 //create types for the rest of the queries
 
-interface IFetchOptions {
+export interface IFetchOptions {
   method: string;
   headers?: HeadersInit;
   body?: string;

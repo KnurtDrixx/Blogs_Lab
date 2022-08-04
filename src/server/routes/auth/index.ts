@@ -9,7 +9,7 @@ const router = express.Router();
 router.use("/login", login);
 router.use("/register", register);
 router.get("/verify", isValidToken, (req, res) => {
-  res.json({ msg: "good job, way to go!" });
+  res.json({ isValid: true });
 });
 
 export default router;

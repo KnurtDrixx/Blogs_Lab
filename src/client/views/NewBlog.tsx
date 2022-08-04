@@ -16,16 +16,16 @@ const NewBlog = () => {
   const handleCreateBlog = () => {
     let tempblogid: number = 0;
 
-    if (!selectedAuthorId) {
-      alert("Blog must have Author! CHOOSE");
-      return;
-    }
+    // if (!selectedAuthorId) {
+    //   alert("Blog must have Author! CHOOSE");
+    //   return;
+    // }
     if (!selectedTagId) {
       alert("Blog must have Tags! CHOOSE Wisely");
       return;
     }
 
-    apiService(`/api/Blogs/`, "POST", { title, content, authorid: selectedAuthorId })
+    apiService(`/api/Blogs/`, "POST", { title, content })
       .then((data) => {
         //!alert("You dare make a new Blog? You have success.");
         console.log(data);
@@ -81,14 +81,14 @@ const NewBlog = () => {
           <label>Blog Content:</label>
           <input placeholder="blogContent" type="text" value={content} onChange={(e) => setBlogContent(e.target.value)} />
           {/* Author Dropdown */}
-          <select onChange={(e) => setSelectedAuthorId(String(e.target.value))} className="form-select my-1" value={String(selectedAuthorId)}>
+          {/* <select onChange={(e) => setSelectedAuthorId(String(e.target.value))} className="form-select my-1" value={String(selectedAuthorId)}>
             <option value={0}>Pick da Author</option>
             {authorsArray.map((author) => (
               <option key={`Author-${author.id}`} value={author.id}>
                 {author.name}
               </option>
             ))}
-          </select>
+          </select> */}
           {/* Tag Dropdown */}
           <select onChange={(e) => setSelectedTagId(Number(e.target.value))} className="form-select my-1" value={Number(selectedTagId)}>
             <option value={0}>Pick a tag</option>

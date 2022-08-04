@@ -1,3 +1,5 @@
+import { IFetchOptions } from "../types";
+
 export async function apiService<T = any>(uri: string, method: string = "GET", data?: any) {
   // retreive token from storage
   const TOKEN = localStorage.getItem("token");

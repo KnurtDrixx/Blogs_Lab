@@ -1,38 +1,27 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { apiService } from "../utilities/apiService";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface PrivateRouteProps {
   children: React.ReactNode;
 }
 
 const PrivateRoute = (props: PrivateRouteProps) => {
-  const [hasChecked, setHasChecked] = useState(false);
-  const [isLoggidIn, setIsLoggedIn] = useState(false);
-
+  const [checking, setChecking] = useState(true);
+  const nav = useNavigate();
   useEffect(() => {
     apiService("/auth/verify")
-      .then((data) => {
-        setHasChecked(true);
-        setIsLoggedIn(true);
+      .then(() => {
+        setChecking(false);
       })
-      .catch((error) => {
-        setHasChecked(true);
-        setIsLoggedIn(false);
+      .catch(() => {
+        nav("/Login");
       });
   }, []);
 
-  if (!hasChecked) {
-    return <></>;
-  }
-
-  if (!isLoggidIn) {
-    return (
-      <>
-        <Navigate to="/Login" />
-      </>
-    );
+  if (checking) {
+    return <h1>Checking that stuff out</h1>;
   }
 
   return <>{props.children}</>;

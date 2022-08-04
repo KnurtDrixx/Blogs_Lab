@@ -16,16 +16,16 @@ const UpdateBlog = () => {
   const nav = useNavigate();
 
   const handleUpdateBlog = () => {
-    if (!selectedAuthorId) {
-      alert("Blog must have Author! CHOOSE");
-      return;
-    }
+    // if (!selectedAuthorId) {
+    //   alert("Blog must have Author! CHOOSE");
+    //   return;
+    // }
     if (!selectedTagId) {
       alert("Blog must have Tags! CHOOSE Wisely");
       return;
     }
 
-    apiService(`/api/Blogs/${id}`, "PUT", { title, content, authorid: selectedAuthorId, tagid: selectedTagId })
+    apiService(`/api/Blogs/${id}`, "PUT", { title, content, tagid: selectedTagId })
       .then((data) => {
         console.log(data);
         nav(`/Blogs/${id}`);
@@ -47,6 +47,7 @@ const UpdateBlog = () => {
   const getAllTags = () => {
     apiService(`/api/Tags`)
       .then((data) => {
+        console.log(data);
         setTagsArray(data); // set the data to state if no error
       })
       .catch((error) => {
@@ -85,14 +86,14 @@ const UpdateBlog = () => {
           <label>Blog Content:</label>
           <input placeholder="blogContent" type="text" value={content} onChange={(e) => setBlogContent(e.target.value)} />
           {/* Author Dropdown */}
-          <select onChange={(e) => setSelectedAuthorId(String(e.target.value))} className="form-select my-1" value={String(selectedAuthorId)}>
+          {/* <select onChange={(e) => setSelectedAuthorId(String(e.target.value))} className="form-select my-1" value={String(selectedAuthorId)}>
             <option value={0}>Pick da Author</option>
             {authorsArray.map((author) => (
               <option key={`Author-${author.id}`} value={author.id}>
                 {author.name}
               </option>
             ))}
-          </select>
+          </select> */}
           {/* Tag Dropdown */}
           <select onChange={(e) => setSelectedTagId(Number(e.target.value))} className="form-select my-1" value={Number(selectedTagId)}>
             <option value={0}>Pick a tag</option>
