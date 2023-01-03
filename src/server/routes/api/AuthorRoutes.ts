@@ -1,5 +1,5 @@
 import * as express from "express";
-import authorsDB from "../database/queries/Authors";
+import authorsDB from "../../database/queries/Authors";
 
 const router = express.Router();
 

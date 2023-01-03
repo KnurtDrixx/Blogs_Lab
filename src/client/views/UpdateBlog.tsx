@@ -2,6 +2,7 @@ import * as React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IBlog, ITags, IAuthors } from "../types";
+import { apiService } from "../utilities/apiService";
 
 const UpdateBlog = () => {
   const [title, setBlogTitle] = useState<string>("");
@@ -15,21 +16,16 @@ const UpdateBlog = () => {
   const nav = useNavigate();
 
   const handleUpdateBlog = () => {
-    if (!selectedAuthorId) {
-      alert("Blog must have Author! CHOOSE");
-      return;
-    }
+    // if (!selectedAuthorId) {
+    //   alert("Blog must have Author! CHOOSE");
+    //   return;
+    // }
     if (!selectedTagId) {
       alert("Blog must have Tags! CHOOSE Wisely");
       return;
     }
 
-    fetch(`/api/Blogs/${id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ title, content, authorid: selectedAuthorId, tagid: selectedTagId }),
-    })
-      .then((res) => res.json())
+    apiService(`/api/Blogs/${id}`, "PUT", { title, content, tagid: selectedTagId })
       .then((data) => {
         console.log(data);
         nav(`/Blogs/${id}`);
@@ -38,8 +34,7 @@ const UpdateBlog = () => {
   };
 
   useEffect(() => {
-    fetch(`/api/Blogs/${id}`)
-      .then((res) => res.json())
+    apiService(`/api/Blogs/${id}`)
       .then((data) => {
         setBlogTitle(data.title);
         setBlogContent(data.content);
@@ -50,9 +45,9 @@ const UpdateBlog = () => {
   }, []);
 
   const getAllTags = () => {
-    fetch(`/api/Tags`)
-      .then((res) => res.json())
+    apiService(`/api/Tags`)
       .then((data) => {
+        console.log(data);
         setTagsArray(data); // set the data to state if no error
       })
       .catch((error) => {
@@ -62,8 +57,7 @@ const UpdateBlog = () => {
   };
 
   const getAllAuthors = () => {
-    fetch(`/api/Authors`)
-      .then((res) => res.json())
+    apiService(`/api/Authors`)
       .then((data) => {
         setAuthorsArray(data); // set the data to state if no error
       })
@@ -92,14 +86,14 @@ const UpdateBlog = () => {
           <label>Blog Content:</label>
           <input placeholder="blogContent" type="text" value={content} onChange={(e) => setBlogContent(e.target.value)} />
           {/* Author Dropdown */}
-          <select onChange={(e) => setSelectedAuthorId(String(e.target.value))} className="form-select my-1" value={String(selectedAuthorId)}>
+          {/* <select onChange={(e) => setSelectedAuthorId(String(e.target.value))} className="form-select my-1" value={String(selectedAuthorId)}>
             <option value={0}>Pick da Author</option>
             {authorsArray.map((author) => (
               <option key={`Author-${author.id}`} value={author.id}>
                 {author.name}
               </option>
             ))}
-          </select>
+          </select> */}
           {/* Tag Dropdown */}
           <select onChange={(e) => setSelectedTagId(Number(e.target.value))} className="form-select my-1" value={Number(selectedTagId)}>
             <option value={0}>Pick a tag</option>

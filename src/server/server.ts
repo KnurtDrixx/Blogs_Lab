@@ -1,13 +1,13 @@
 import * as express from "express";
 import * as path from "path";
-import apiRouter from "./routes";
+import Routes from "./routes";
 
 const app = express();
 
 app.use(express.static("public"));
 app.use(express.json());
 
-app.use("/api", apiRouter);
+app.use(Routes);
 
 app.use("*", (req, res) => {
   const indexHTML = path.join(__dirname, "../public/index.html");

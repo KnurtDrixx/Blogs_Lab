@@ -2,6 +2,8 @@ import * as React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IBlog } from "../types";
+import { apiService } from "../utilities/apiService";
+import Marquee from "../components/Marquee";
 
 const SingleBlog = () => {
   const nav = useNavigate();
@@ -15,18 +17,16 @@ const SingleBlog = () => {
   const [color, setColor] = useState<String>("");
 
   const deleteBlog = () => {
-    fetch(`/api/Blogs/${id}`, {
-      method: "DELETE",
-      // headers: { "content-type": "application/json" },
-      // body: JSON.stringify({ content: chirpContent, location: chirpLocation }),
-    })
-      .then((res) => res.json())
+    apiService(`/api/Blogs/${id}`, "DELETE")
       .then((message) => {
         console.log(message);
         alert(`Blog ${id} has been found and KILLED successfully`);
         nav(`/Blogs`);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(`Don't touch that it isn't yours`);
+      });
   };
 
   const randomColor = () => {
@@ -44,8 +44,7 @@ const SingleBlog = () => {
   }, [color]);
 
   useEffect(() => {
-    fetch(`/api/Blogs/${id}`)
-      .then((res) => res.json())
+    apiService(`/api/Blogs/${id}`)
       .then((data) => setBlog(data))
       .catch((err) => console.log(err));
   }, []);
@@ -82,7 +81,7 @@ const SingleBlog = () => {
 
         {/* deleteButton */}
         {/* #ts-ignore */}
-        <marquee behavior="alternate" scrollamount="10">
+        <Marquee behavior="alternate" scrollamount="10">
           <button
             className="btn btn-danger btn-lg"
             onClick={() => {
@@ -91,8 +90,8 @@ const SingleBlog = () => {
           >
             Wouldst tho Delete a Blog?
           </button>
-        </marquee>
-        <marquee behavior="alternate" scrollamount="20">
+        </Marquee>
+        <Marquee behavior="alternate" scrollamount="20">
           <button
             className={`${delete1 ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -101,9 +100,9 @@ const SingleBlog = () => {
           >
             Are You Sure?
           </button>
-        </marquee>
+        </Marquee>
 
-        <marquee behavior="alternate" scrollamount="30">
+        <Marquee behavior="alternate" scrollamount="30">
           <button
             className={`${delete2 ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -112,9 +111,9 @@ const SingleBlog = () => {
           >
             Why do this?
           </button>
-        </marquee>
+        </Marquee>
 
-        <marquee behavior="alternate" scrollamount="40">
+        <Marquee behavior="alternate" scrollamount="40">
           <button
             className={`${delete3 ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -123,9 +122,9 @@ const SingleBlog = () => {
           >
             Please Stop I Have 3 Kids!
           </button>
-        </marquee>
+        </Marquee>
 
-        <marquee behavior="alternate" scrollamount="45">
+        <Marquee behavior="alternate" scrollamount="45">
           <button
             className={`${delete4 ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -134,9 +133,9 @@ const SingleBlog = () => {
           >
             Look at Me While You Delete Me!
           </button>
-        </marquee>
+        </Marquee>
 
-        <marquee behavior="alternate" scrollamount="10">
+        <Marquee behavior="alternate" scrollamount="10">
           <button
             className={`${deleteFinal ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -145,7 +144,7 @@ const SingleBlog = () => {
           >
             Final Delete?
           </button>
-        </marquee>
+        </Marquee>
       </>
     );
   }
