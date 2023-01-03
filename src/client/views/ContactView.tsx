@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiService } from "../utilities/apiService";
+import Marquee from "../components/Marquee";
 
 const ContactPage = () => {
   const [contact, setContact] = useState("");
@@ -34,9 +35,9 @@ const ContactPage = () => {
 
   return (
     <>
-      <marquee scrollamount="20" behavior="alternate">
+      <Marquee scrollamount="20" behavior="alternate">
         <input placeholder="Put Email Here" value={contact} onChange={(e) => setContact(e.target.value)} />
-      </marquee>
+      </Marquee>
 
       <button className="btn btn-warning" onClick={subscribeToBlogLife}>
         Subscribe to see more Blogs Forever

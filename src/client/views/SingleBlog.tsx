@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IBlog } from "../types";
 import { apiService } from "../utilities/apiService";
+import Marquee from "../components/Marquee";
 
 const SingleBlog = () => {
   const nav = useNavigate();
@@ -80,7 +81,7 @@ const SingleBlog = () => {
 
         {/* deleteButton */}
         {/* #ts-ignore */}
-        <marquee behavior="alternate" scrollamount="10">
+        <Marquee behavior="alternate" scrollamount="10">
           <button
             className="btn btn-danger btn-lg"
             onClick={() => {
@@ -89,8 +90,8 @@ const SingleBlog = () => {
           >
             Wouldst tho Delete a Blog?
           </button>
-        </marquee>
-        <marquee behavior="alternate" scrollamount="20">
+        </Marquee>
+        <Marquee behavior="alternate" scrollamount="20">
           <button
             className={`${delete1 ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -99,9 +100,9 @@ const SingleBlog = () => {
           >
             Are You Sure?
           </button>
-        </marquee>
+        </Marquee>
 
-        <marquee behavior="alternate" scrollamount="30">
+        <Marquee behavior="alternate" scrollamount="30">
           <button
             className={`${delete2 ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -110,9 +111,9 @@ const SingleBlog = () => {
           >
             Why do this?
           </button>
-        </marquee>
+        </Marquee>
 
-        <marquee behavior="alternate" scrollamount="40">
+        <Marquee behavior="alternate" scrollamount="40">
           <button
             className={`${delete3 ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -121,9 +122,9 @@ const SingleBlog = () => {
           >
             Please Stop I Have 3 Kids!
           </button>
-        </marquee>
+        </Marquee>
 
-        <marquee behavior="alternate" scrollamount="45">
+        <Marquee behavior="alternate" scrollamount="45">
           <button
             className={`${delete4 ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -132,9 +133,9 @@ const SingleBlog = () => {
           >
             Look at Me While You Delete Me!
           </button>
-        </marquee>
+        </Marquee>
 
-        <marquee behavior="alternate" scrollamount="10">
+        <Marquee behavior="alternate" scrollamount="10">
           <button
             className={`${deleteFinal ? `visible` : `invisible`} btn btn-danger btn-lg`}
             onClick={() => {
@@ -143,7 +144,7 @@ const SingleBlog = () => {
           >
             Final Delete?
           </button>
-        </marquee>
+        </Marquee>
       </>
     );
   }
