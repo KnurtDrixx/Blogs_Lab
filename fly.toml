@@ -1,6 +1,6 @@
 # fly.toml file generated for blog-lab on 2023-01-04T11:39:34-05:00
 
-app = "blog-lab"
+app = "blogs-lab"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
